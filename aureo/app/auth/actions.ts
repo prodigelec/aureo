@@ -4,18 +4,7 @@ import { redirect } from "next/navigation";
 
 import { loginUser, registerUser } from "@/lib/auth";
 
-type ActionState =
-  | {
-      success: true;
-      message: string;
-    }
-  | {
-      success: false;
-      message: string;
-      fieldErrors?: Record<string, string[]>;
-    };
-
-export async function registerAction(formData: FormData): Promise<ActionState> {
+export async function registerAction(formData: FormData): Promise<void> {
   const name = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
@@ -27,17 +16,13 @@ export async function registerAction(formData: FormData): Promise<ActionState> {
   });
 
   if (!result.success) {
-    return {
-      success: false,
-      message: result.message,
-      fieldErrors: result.fieldErrors,
-    };
+    redirect(`/register?error=${encodeURIComponent(result.message)}`);
   }
 
   redirect("/login");
 }
 
-export async function loginAction(formData: FormData): Promise<ActionState> {
+export async function loginAction(formData: FormData): Promise<void> {
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -47,11 +32,7 @@ export async function loginAction(formData: FormData): Promise<ActionState> {
   });
 
   if (!result.success) {
-    return {
-      success: false,
-      message: result.message,
-      fieldErrors: result.fieldErrors,
-    };
+    redirect(`/login?error=${encodeURIComponent(result.message)}`);
   }
 
   redirect("/dashboard");
