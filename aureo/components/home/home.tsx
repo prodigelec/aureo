@@ -1,0 +1,10 @@
+export { HomeHeader } from "./components/header";
+export { HomeHero } from "./components/hero";
+export { HomeSocialProof } from "./components/social-proof";
+export { HomeFeatures } from "./components/features";
+export { HomeHowItWorks } from "./components/how-it-works";
+export { HomeTestimonials } from "./components/testimonials";
+export { HomePricing } from "./components/pricing";
+export { HomeSecurity } from "./components/security";
+export { HomeFinalCta } from "./components/final-cta";
+export { HomeFooter } from "./components/footer";

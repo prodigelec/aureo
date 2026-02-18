@@ -569,14 +569,14 @@ Border-radius : 8px (cards), 6px (boutons), 4px (inputs), 999px (badges)
 
 **Tableau d’usage recommandé :**
 
-| Contexte                                     | Variante de logo           |
-| -------------------------------------------- | -------------------------- |
-| Header de l’application / landing page       | Logo complet couleur       |
-| Écran de connexion / onboarding              | Logo complet couleur       |
-| Favicon, avatar utilisateur, icône compacte  | Icône seule couleur        |
-| Sections sur fond très clair ou documents    | Logo complet monochrome sombre |
-| Sections sur fond sombre (`#1A1A2E` ou ton)  | Logo complet monochrome clair  |
-| Impression noir et blanc                     | Logo complet monochrome sombre |
+| Contexte                                    | Variante de logo               |
+| ------------------------------------------- | ------------------------------ |
+| Header de l’application / landing page      | Logo complet couleur           |
+| Écran de connexion / onboarding             | Logo complet couleur           |
+| Favicon, avatar utilisateur, icône compacte | Icône seule couleur            |
+| Sections sur fond très clair ou documents   | Logo complet monochrome sombre |
+| Sections sur fond sombre (`#1A1A2E` ou ton) | Logo complet monochrome clair  |
+| Impression noir et blanc                    | Logo complet monochrome sombre |
 
 ### 7.4 Wireframes — Description des Écrans Clés
 
