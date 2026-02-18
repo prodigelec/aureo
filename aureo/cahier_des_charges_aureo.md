@@ -1,5 +1,7 @@
 # Cahier des Charges — Aureo
 
+![Logo Aureo](public/logo_aureo.png)
+
 ### Assistant Financier Personnel Intelligent
 
 > **Version** `2.0.0` · **Statut** `En développement` · **Contexte** `Projet personnel / Portfolio` · **Dernière mise à jour** `Février 2026`
@@ -239,7 +241,7 @@ Tech level   : Élevé
 
 #### 1.1 Initialisation du Projet
 
-- Configuration Next.js 15, TypeScript Strict, Tailwind CSS, ESLint + Prettier
+- Configuration Next.js 16, TypeScript Strict, Tailwind CSS 4, ESLint + Prettier
 - Configuration Prisma avec connecteur MongoDB
 - Mise en place des variables d'environnement (`.env.local`)
 - Clean start : suppression des fichiers de démo Next.js
@@ -339,15 +341,15 @@ Tech level   : Élevé
 
 | Couche               | Technologie  | Version | Justification                                          |
 | -------------------- | ------------ | ------- | ------------------------------------------------------ |
-| **Framework**        | Next.js      | 15.x    | App Router, Server Actions, streaming SSR via Suspense |
+| **Framework**        | Next.js      | 16.x    | App Router, Server Actions, streaming SSR via Suspense |
 | **Langage**          | TypeScript   | Strict  | Type-safety de bout en bout, erreurs à la compilation  |
 | **Base de données**  | MongoDB      | 7.x     | Flexibilité du schéma NoSQL pour données financières   |
-| **ORM**              | Prisma       | 5.x     | Requêtes type-safe, migrations, client auto-généré     |
-| **Authentification** | Auth.js      | v5      | Sessions HttpOnly, OAuth providers, JWT sécurisé       |
-| **Validation**       | Zod          | 3.x     | Schémas partagés frontend/backend, parsing sécurisé    |
-| **Styling**          | Tailwind CSS | 3.x     | Utility-first, design system cohérent                  |
+| **ORM**              | Prisma       | 7.x     | Requêtes type-safe, migrations, client auto-généré     |
+| **Authentification** | Auth.js      | 4.x     | Sessions HttpOnly, OAuth providers, JWT sécurisé       |
+| **Validation**       | Zod          | 4.x     | Schémas partagés frontend/backend, parsing sécurisé    |
+| **Styling**          | Tailwind CSS | 4.x     | Utility-first, design system cohérent                  |
 | **Composants**       | Shadcn/ui    | Latest  | Headless, accessible (ARIA), personnalisable           |
-| **État client**      | Zustand      | 4.x     | Léger, minimal, pour état global UI uniquement         |
+| **État client**      | Zustand      | 5.x     | Léger, minimal, pour état global UI uniquement         |
 | **Icônes**           | Lucide React | Latest  | Cohérence visuelle, tree-shakable                      |
 
 ### 6.2 Structure du Projet
@@ -548,7 +550,35 @@ Espacements : base 4px, échelle × 2 (4, 8, 16, 24, 32, 48, 64)
 Border-radius : 8px (cards), 6px (boutons), 4px (inputs), 999px (badges)
 ```
 
-### 7.3 Wireframes — Description des Écrans Clés
+### 7.3 Identité Visuelle & Logo
+
+- Le logo Aureo est utilisé en version couleur principale sur fond clair (`#F8F6F0` ou blanc).
+- Une zone de respiration minimale équivalente à la hauteur de la lettre "A" est conservée autour du logo.
+- Le logo ne doit jamais être étiré, compressé ou pivoté (ratio d'aspect inchangé).
+- Sur fond sombre (`#1A1A2E`), une variante inversée ou en monochrome clair est utilisée pour assurer le contraste.
+- Le logo ne doit pas être placé dans un bloc contenant trop d'informations concurrentes (priorité de lecture élevée).
+- Taille minimale recommandée : 24 px de hauteur en interface web (desktop et mobile).
+
+**Variantes officielles du logo :**
+
+- Logo complet : symbole + mot-symbole "Aureo", usage principal (header, landing, documents).
+- Icône seule : symbole sans texte, usage pour favicon, avatar, pictogramme compact.
+- Version monochrome sombre : à utiliser sur fonds très clairs ou en impression N&B.
+- Version monochrome claire : à utiliser sur fonds sombres (`#1A1A2E` ou équivalents).
+- Aucune recolorisation arbitraire : seules les variantes définies ci-dessus sont autorisées.
+
+**Tableau d’usage recommandé :**
+
+| Contexte                                     | Variante de logo           |
+| -------------------------------------------- | -------------------------- |
+| Header de l’application / landing page       | Logo complet couleur       |
+| Écran de connexion / onboarding              | Logo complet couleur       |
+| Favicon, avatar utilisateur, icône compacte  | Icône seule couleur        |
+| Sections sur fond très clair ou documents    | Logo complet monochrome sombre |
+| Sections sur fond sombre (`#1A1A2E` ou ton)  | Logo complet monochrome clair  |
+| Impression noir et blanc                     | Logo complet monochrome sombre |
+
+### 7.4 Wireframes — Description des Écrans Clés
 
 #### Écran 1 — Page de Connexion (`/login`)
 
