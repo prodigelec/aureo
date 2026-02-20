@@ -1,26 +1,36 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, Suspense } from "react";
 import { toast } from "sonner";
 
 function ToastContent() {
     const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const success = searchParams.get("success");
         const error = searchParams.get("error");
 
-        if (success) {
-            toast.success(success);
-        }
+        if (success || error) {
+            if (success) {
+                toast.success(success);
+            }
 
-        if (error) {
-            // We only toast error if it hasn't been traditionally handled by the page's error state
-            // But for general purpose, this handler is great for redirects
-            toast.error(error);
+            if (error) {
+                toast.error(error);
+            }
+
+            // Clean up the URL
+            const newSearchParams = new URLSearchParams(searchParams.toString());
+            newSearchParams.delete("success");
+            newSearchParams.delete("error");
+
+            const newUrl = pathname + (newSearchParams.toString() ? `?${newSearchParams.toString()}` : "");
+            router.replace(newUrl, { scroll: false });
         }
-    }, [searchParams]);
+    }, [searchParams, pathname, router]);
 
     return null;
 }
