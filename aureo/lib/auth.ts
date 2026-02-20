@@ -10,7 +10,7 @@ const registerSchema = z.object({
     .max(100, { message: "Le nom ne peut pas dépasser 100 caractères" })
     .trim(),
   email: z
-    .string( "L'email est requis" )
+    .string("L'email est requis")
     .trim()
     .toLowerCase()
     .pipe(
@@ -24,10 +24,13 @@ const registerSchema = z.object({
       }),
     ),
   password: z
-    .string( "Le mot de passe est requis" )
+    .string("Le mot de passe est requis")
     .min(8, { message: "Le mot de passe doit avoir au moins 8 caractères" })
-    .regex(/[a-zA-Z]/, {
-      message: "Le mot de passe doit contenir au moins une lettre",
+    .regex(/[a-z]/, {
+      message: "Le mot de passe doit contenir au moins une lettre minuscule",
+    })
+    .regex(/[A-Z]/, {
+      message: "Le mot de passe doit contenir au moins une lettre majuscule",
     })
     .regex(/[0-9]/, {
       message: "Le mot de passe doit contenir au moins un chiffre",
@@ -39,7 +42,7 @@ const registerSchema = z.object({
 
 const loginSchema = z.object({
   email: z
-    .string("L'email est requis" )
+    .string("L'email est requis")
     .trim()
     .toLowerCase()
     .pipe(
@@ -52,10 +55,13 @@ const loginSchema = z.object({
       }),
     ),
   password: z
-    .string( "Le mot de passe est requis" )
+    .string("Le mot de passe est requis")
     .min(8, { message: "Le mot de passe doit avoir au moins 8 caractères" })
-    .regex(/[a-zA-Z]/, {
-      message: "Le mot de passe doit contenir au moins une lettre",
+    .regex(/[a-z]/, {
+      message: "Le mot de passe doit contenir au moins une lettre minuscule",
+    })
+    .regex(/[A-Z]/, {
+      message: "Le mot de passe doit contenir au moins une lettre majuscule",
     })
     .regex(/[0-9]/, {
       message: "Le mot de passe doit contenir au moins un chiffre",
@@ -89,17 +95,21 @@ type LoginUser = RegisterUser;
 function validationError(error: z.ZodError): AuthError {
   const fieldErrors = error.format();
   const formatted: Record<string, string[]> = {};
+  let firstErrorMessage = "Données invalides";
 
   Object.entries(fieldErrors).forEach(([key, value]) => {
-    if (value && value._errors && value._errors.length > 0) {
+    if (key !== "_errors" && value && "_errors" in value && value._errors.length > 0) {
       formatted[key] = value._errors;
+      if (firstErrorMessage === "Données invalides") {
+        firstErrorMessage = value._errors[0];
+      }
     }
   });
 
   return {
     success: false,
     status: 400,
-    message: "Données invalides",
+    message: firstErrorMessage,
     fieldErrors: formatted,
   };
 }

@@ -14,14 +14,14 @@ export default function TrustBadges() {
             <div className="flex items-center gap-2 opacity-50 transition-opacity hover:opacity-100">
                 <Shield className="h-4 w-4" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">
-                    RGPD Compliant
+                    Conforme RGPD
                 </span>
             </div>
             <div className="h-1 w-1 rounded-full bg-border" />
             <div className="flex items-center gap-2 opacity-50 transition-opacity hover:opacity-100">
                 <Lock className="h-4 w-4" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">
-                    SSL Secure
+                    SSL Sécurisé
                 </span>
             </div>
         </motion.div>

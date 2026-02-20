@@ -4,6 +4,7 @@ import { useState, useActionState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { User, Mail, Lock, Eye, EyeOff, Loader2, ArrowRight } from "lucide-react";
 import { registerAction } from "@/app/auth/actions";
 import FormInput from "./FormInput";
@@ -19,18 +20,40 @@ export default function RegisterForm() {
         password: "",
     });
 
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+
+    useEffect(() => {
+        if (state?.fieldErrors) {
+            setFieldErrors(state.fieldErrors);
+        }
+
+        if (state && !state.success && state.message) {
+            toast.error(state.message);
+        }
+    }, [state]);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+        // Clear error when user changes input
+        if (fieldErrors[name]) {
+            setFieldErrors((prev) => {
+                const next = { ...prev };
+                delete next[name];
+                return next;
+            });
+        }
     };
 
     const getPasswordStrength = (password: string) => {
         let strength = 0;
         if (password.length >= 8) strength++;
-        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+        if (password.match(/[a-z]/)) strength++;
+        if (password.match(/[A-Z]/)) strength++;
         if (password.match(/[0-9]/)) strength++;
         if (password.match(/[^a-zA-Z0-9]/)) strength++;
-        return strength;
+        // Caps at 4 levels for the UI bars
+        return Math.min(strength, 4);
     };
 
     const passwordStrength = getPasswordStrength(formData.password);
@@ -62,7 +85,8 @@ export default function RegisterForm() {
                     onBlur={() => setFocusedField(null)}
                     isFocused={focusedField === "name"}
                     icon={User}
-                    showSuccess={!!formData.name}
+                    showSuccess={!!formData.name && !fieldErrors.name}
+                    error={fieldErrors.name?.[0]}
                 />
 
                 <FormInput
@@ -77,7 +101,8 @@ export default function RegisterForm() {
                     onBlur={() => setFocusedField(null)}
                     isFocused={focusedField === "email"}
                     icon={Mail}
-                    showSuccess={formData.email.includes("@")}
+                    showSuccess={formData.email.includes("@") && !fieldErrors.email}
+                    error={fieldErrors.email?.[0]}
                 />
 
                 <div className="space-y-2">
@@ -93,6 +118,7 @@ export default function RegisterForm() {
                         onBlur={() => setFocusedField(null)}
                         isFocused={focusedField === "password"}
                         icon={Lock}
+                        error={fieldErrors.password?.[0]}
                         rightElement={
                             <button
                                 type="button"
@@ -111,12 +137,12 @@ export default function RegisterForm() {
                                     <div
                                         key={level}
                                         className={`h-1 flex-1 rounded-full transition-all ${level <= passwordStrength
-                                                ? level <= 2
-                                                    ? "bg-red-500"
-                                                    : level === 3
-                                                        ? "bg-yellow-500"
-                                                        : "bg-green-500"
-                                                : "bg-muted/30"
+                                            ? level <= 2
+                                                ? "bg-red-500"
+                                                : level === 3
+                                                    ? "bg-yellow-500"
+                                                    : "bg-green-500"
+                                            : "bg-muted/30"
                                             }`}
                                     />
                                 ))}
@@ -139,7 +165,7 @@ export default function RegisterForm() {
                             {isPending ? (
                                 <>
                                     <Loader2 className="h-4 w-4 animate-spin" />
-                                    Inscription...
+                                    Inscription en cours...
                                 </>
                             ) : (
                                 <>
