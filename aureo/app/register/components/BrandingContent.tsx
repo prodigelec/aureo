@@ -94,11 +94,11 @@ export default function BrandingContent({ features }: BrandingContentProps) {
             >
                 <div className="flex items-center gap-2">
                     <Shield className="h-4 w-4 text-green-500" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Secured SSL</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">SSL Sécurisé</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-500" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">RGPD Ready</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Conforme RGPD</span>
                 </div>
             </motion.div>
         </div>

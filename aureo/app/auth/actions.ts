@@ -16,10 +16,14 @@ export async function registerAction(prevState: any, formData: FormData) {
   });
 
   if (!result.success) {
-    return { success: false, message: result.message };
+    return {
+      success: false,
+      message: result.message,
+      fieldErrors: "fieldErrors" in result ? result.fieldErrors : undefined
+    };
   }
 
-  redirect("/register?success=" + encodeURIComponent("Enregistrement de votre compte réussi! 👍"));
+  redirect("/register?success=" + encodeURIComponent("Enregistrement de votre compte réussi ! 👍"));
 }
 
 export async function loginAction(prevState: any, formData: FormData) {
