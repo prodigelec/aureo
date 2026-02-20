@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, SearchX } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
     return (
@@ -58,21 +59,21 @@ export default function NotFound() {
                     >
                         <motion.div
                             initial={{ scale: 0 }}
-                            animate={{ scale: 1, rotate: [-10, 10, 0] }}
+                            animate={{ scale: 1 }}
                             transition={{ type: "spring", delay: 0.2, duration: 0.8 }}
-                            className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 shadow-lg shadow-primary/10 ring-1 ring-primary/20"
+                            className="mb-8 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/60 shadow-xl shadow-primary/30"
                         >
-                            <SearchX className="h-10 w-10 text-primary" />
+                            <Image src="/logo_aureo.png" alt="Aureo Logo" width={50} height={50} priority className="drop-shadow-xl" />
                         </motion.div>
 
                         <h1 className="mb-2 text-6xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                             404
                         </h1>
 
-                        <h2 className="mb-4 text-2xl font-bold">Page introuvable</h2>
+                        <h2 className="mb-4 text-2xl font-bold">Court-circuit...</h2>
 
                         <p className="mb-8 text-sm text-muted-foreground md:text-base">
-                            Oups ! La page que vous recherchez semble s'être égarée dans les méandres d'Aureo, ou elle n'existe plus.
+                            Il semblerait que nous ayons perdu la connexion. La page que vous cherchez n'existe plus ou la clé a été égarée. Le système Aureo ne trouve rien !
                         </p>
 
                         <Link
