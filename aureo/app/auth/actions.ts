@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 
 import { loginUser, registerUser } from "@/lib/auth";
 
-export async function registerAction(formData: FormData): Promise<void> {
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const password = formData.get("password");
+export async function registerAction(prevState: any, formData: FormData) {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
   const result = await registerUser({
     name,
@@ -16,15 +16,15 @@ export async function registerAction(formData: FormData): Promise<void> {
   });
 
   if (!result.success) {
-    redirect(`/register?error=${encodeURIComponent(result.message)}`);
+    return { success: false, message: result.message };
   }
 
-  redirect("/login");
+  redirect("/register?success=" + encodeURIComponent("Enregistrement de votre compte réussi! 👍"));
 }
 
-export async function loginAction(formData: FormData): Promise<void> {
-  const email = formData.get("email");
-  const password = formData.get("password");
+export async function loginAction(prevState: any, formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
   const result = await loginUser({
     email,
@@ -32,7 +32,7 @@ export async function loginAction(formData: FormData): Promise<void> {
   });
 
   if (!result.success) {
-    redirect(`/login?error=${encodeURIComponent(result.message)}`);
+    return { success: false, message: result.message };
   }
 
   redirect("/dashboard");
