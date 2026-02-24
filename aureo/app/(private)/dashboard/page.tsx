@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { getCurrentUser } from "@/lib/session";
+import OnboardingModal from "@/components/shared/OnboardingModal";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -200,7 +201,9 @@ export default async function DashboardPage() {
   const hasBudgets = false;
 
   return (
-    <main className="flex-1 p-6 lg:p-8 space-y-8">
+    <>
+      {!user.onboardingCompleted && <OnboardingModal />}
+      <main className="flex-1 p-6 lg:p-8 space-y-8">
 
       {/* ── En-tête ── */}
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pl-14 lg:pl-0">
@@ -394,5 +397,6 @@ export default async function DashboardPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
