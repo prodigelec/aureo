@@ -4,7 +4,7 @@
 
 ### Assistant Financier Personnel Intelligent
 
-> **Version** `2.0.0` · **Statut** `En développement` · **Contexte** `Projet personnel / Portfolio` · **Dernière mise à jour** `Février 2026`
+> **Version** `2.1.0` · **Statut** `En développement` · **Contexte** `Projet personnel / Portfolio` · **Dernière mise à jour** `Février 2026`
 
 ---
 
@@ -175,51 +175,51 @@ Tech level   : Élevé
 
 ## 4. User Stories & Cas d'Usage
 
-> Format : **En tant que** [persona], **je veux** [action], **afin de** [bénéfice].  
+> Format : **En tant que** [persona], **je veux** [action], **afin de** [bénéfice].
 > Priorité : 🔴 Critique · 🟡 Important · 🟢 Nice-to-have
 
 ### 4.1 Authentification & Onboarding
 
-| #     | User Story                                                                                                                                                                            | Persona | Priorité |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- |
-| US-01 | En tant que nouvel utilisateur, je veux créer un compte avec mon email et un mot de passe, afin d'accéder à l'application de façon sécurisée.                                         | Tous    | 🔴       |
-| US-02 | En tant que nouvel utilisateur, je veux me connecter via mon compte Google, afin de ne pas avoir à mémoriser un mot de passe supplémentaire.                                          | Lucas   | 🔴       |
-| US-03 | En tant qu'utilisateur, je veux être guidé par un onboarding en 3 étapes (ajout de compte, première transaction, premier budget), afin de comprendre rapidement la valeur de l'outil. | Sophie  | 🟡       |
-| US-04 | En tant qu'utilisateur, je veux pouvoir réinitialiser mon mot de passe par email, afin de ne pas être bloqué si je l'oublie.                                                          | Tous    | 🔴       |
+| #     | User Story                                                                                                                                                                            | Persona | Priorité | Statut |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- | ------ |
+| US-01 | En tant que nouvel utilisateur, je veux créer un compte avec mon email et un mot de passe, afin d'accéder à l'application de façon sécurisée.                                         | Tous    | 🔴       | ✅ Fait |
+| US-02 | En tant que nouvel utilisateur, je veux me connecter via mon compte Google, afin de ne pas avoir à mémoriser un mot de passe supplémentaire.                                          | Lucas   | 🔴       | ⏳ À venir |
+| US-03 | En tant qu'utilisateur, je veux être guidé par un onboarding en 3 étapes (ajout de compte, première transaction, premier budget), afin de comprendre rapidement la valeur de l'outil. | Sophie  | 🟡       | ⏳ À venir |
+| US-04 | En tant qu'utilisateur, je veux pouvoir réinitialiser mon mot de passe par email, afin de ne pas être bloqué si je l'oublie.                                                          | Tous    | 🔴       | ⏳ À venir |
 
 ### 4.2 Gestion des Comptes Bancaires
 
-| #     | User Story                                                                                                                                             | Persona       | Priorité |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | -------- |
-| US-05 | En tant qu'utilisateur, je veux ajouter un compte bancaire manuellement (nom, type, solde), afin d'avoir une base de départ même sans synchronisation. | Tous          | 🔴       |
-| US-06 | En tant qu'utilisateur, je veux voir le solde consolidé de tous mes comptes sur une seule page, afin d'avoir une vision globale instantanée.           | Lucas, Sophie | 🔴       |
-| US-07 | En tant qu'utilisateur, je veux archiver un compte que je n'utilise plus, afin de garder mon dashboard propre sans perdre l'historique.                | Sophie        | 🟡       |
+| #     | User Story                                                                                                                                                                             | Persona       | Priorité | Statut |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------ |
+| US-05 | En tant qu'utilisateur, je veux ajouter un compte bancaire manuellement (nom, type, solde), afin d'avoir une base de départ même sans synchronisation.                                 | Tous          | 🔴       | ⏳ Phase 2 |
+| US-06 | En tant qu'utilisateur, je veux voir le solde consolidé de tous mes comptes sur une seule page, afin d'avoir une vision globale instantanée.                                           | Lucas, Sophie | 🔴       | ⏳ Phase 2 |
+| US-07 | En tant qu'utilisateur, je veux archiver un compte que je n'utilise plus, afin de garder mon dashboard propre sans perdre l'historique.                                                | Sophie        | 🟡       | ⏳ Phase 2 |
 
 ### 4.3 Transactions & Catégorisation
 
-| #     | User Story                                                                                                                                             | Persona | Priorité |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | -------- |
-| US-08 | En tant qu'utilisateur, je veux ajouter une transaction manuellement (montant, date, description, compte), afin de saisir mes dépenses en temps réel.  | Mehdi   | 🔴       |
-| US-09 | En tant qu'utilisateur, je veux que mes transactions soient automatiquement catégorisées (alimentation, transport, loisirs…), afin de gagner du temps. | Lucas   | 🔴       |
-| US-10 | En tant qu'utilisateur, je veux corriger la catégorie d'une transaction, afin d'améliorer la précision de l'analyse.                                   | Sophie  | 🔴       |
-| US-11 | En tant qu'utilisateur, je veux filtrer mes transactions par période, catégorie et compte, afin de trouver rapidement une dépense précise.             | Sophie  | 🟡       |
-| US-12 | En tant qu'utilisateur, je veux rechercher une transaction par mot-clé, afin de retrouver un achat spécifique.                                         | Lucas   | 🟡       |
+| #     | User Story                                                                                                                                             | Persona | Priorité | Statut |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | -------- | ------ |
+| US-08 | En tant qu'utilisateur, je veux ajouter une transaction manuellement (montant, date, description, compte), afin de saisir mes dépenses en temps réel.  | Mehdi   | 🔴       | ⏳ Phase 3 |
+| US-09 | En tant qu'utilisateur, je veux que mes transactions soient automatiquement catégorisées (alimentation, transport, loisirs…), afin de gagner du temps. | Lucas   | 🔴       | ⏳ Phase 3 |
+| US-10 | En tant qu'utilisateur, je veux corriger la catégorie d'une transaction, afin d'améliorer la précision de l'analyse.                                   | Sophie  | 🔴       | ⏳ Phase 3 |
+| US-11 | En tant qu'utilisateur, je veux filtrer mes transactions par période, catégorie et compte, afin de trouver rapidement une dépense précise.             | Sophie  | 🟡       | ⏳ Phase 3 |
+| US-12 | En tant qu'utilisateur, je veux rechercher une transaction par mot-clé, afin de retrouver un achat spécifique.                                         | Lucas   | 🟡       | ⏳ Phase 3 |
 
 ### 4.4 Budget & Alertes
 
-| #     | User Story                                                                                                                                                  | Persona       | Priorité |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
-| US-13 | En tant qu'utilisateur, je veux définir un budget mensuel par catégorie, afin de fixer des limites de dépenses claires.                                     | Sophie, Mehdi | 🔴       |
-| US-14 | En tant qu'utilisateur, je veux recevoir une alerte quand j'atteins 80% de mon budget sur une catégorie, afin d'anticiper le dépassement.                   | Mehdi         | 🔴       |
-| US-15 | En tant qu'utilisateur, je veux voir en temps réel le budget restant pour chaque catégorie ce mois-ci, afin de décider si je peux me permettre une dépense. | Mehdi         | 🔴       |
+| #     | User Story                                                                                                                                                  | Persona       | Priorité | Statut |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------ |
+| US-13 | En tant qu'utilisateur, je veux définir un budget mensuel par catégorie, afin de fixer des limites de dépenses claires.                                     | Sophie, Mehdi | 🔴       | ⏳ Phase 4 |
+| US-14 | En tant qu'utilisateur, je veux recevoir une alerte quand j'atteins 80% de mon budget sur une catégorie, afin d'anticiper le dépassement.                   | Mehdi         | 🔴       | ⏳ Phase 4 |
+| US-15 | En tant qu'utilisateur, je veux voir en temps réel le budget restant pour chaque catégorie ce mois-ci, afin de décider si je peux me permettre une dépense. | Mehdi         | 🔴       | ⏳ Phase 4 |
 
 ### 4.5 Analyse & Rapports
 
-| #     | User Story                                                                                                                                             | Persona | Priorité |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | -------- |
-| US-16 | En tant qu'utilisateur, je veux voir un rapport mensuel résumant mes revenus, dépenses et épargne, afin de comprendre ma situation financière globale. | Sophie  | 🟡       |
-| US-17 | En tant qu'utilisateur, je veux comparer mes dépenses par catégorie entre deux mois, afin d'identifier des tendances.                                  | Lucas   | 🟡       |
-| US-18 | En tant qu'utilisateur, je veux voir une prévision de mon solde en fin de mois basée sur mes habitudes, afin d'anticiper les tensions de trésorerie.   | Mehdi   | 🟢       |
+| #     | User Story                                                                                                                                             | Persona | Priorité | Statut |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | -------- | ------ |
+| US-16 | En tant qu'utilisateur, je veux voir un rapport mensuel résumant mes revenus, dépenses et épargne, afin de comprendre ma situation financière globale. | Sophie  | 🟡       | ⏳ Phase 5 |
+| US-17 | En tant qu'utilisateur, je veux comparer mes dépenses par catégorie entre deux mois, afin d'identifier des tendances.                                  | Lucas   | 🟡       | ⏳ Phase 5 |
+| US-18 | En tant qu'utilisateur, je veux voir une prévision de mon solde en fin de mois basée sur mes habitudes, afin d'anticiper les tensions de trésorerie.   | Mehdi   | 🟢       | ⏳ Phase 5 |
 
 ---
 
@@ -227,38 +227,54 @@ Tech level   : Élevé
 
 ### 5.1 Vue d'Ensemble
 
-| Statut          | Phase                                   | Périmètre                                     | Délai estimé |
-| --------------- | --------------------------------------- | --------------------------------------------- | ------------ |
-| 🟢 **En cours** | Phase 1 — Fondations & Auth             | Socle technique, authentification, schéma BDD | 2 semaines   |
-| 🟡 **Planifié** | Phase 2 — Comptes & Dashboard           | Gestion des comptes, vue consolidée           | 2 semaines   |
-| 🔴 **À venir**  | Phase 3 — Transactions & Catégorisation | Saisie, filtres, moteur de catégorisation     | 3 semaines   |
-| 🔴 **À venir**  | Phase 4 — Budgets & Alertes             | Limites par catégorie, notifications          | 2 semaines   |
-| 🔴 **À venir**  | Phase 5 — Analyse & Rapports            | Rapports mensuels, comparaisons, export       | 3 semaines   |
+| Statut              | Phase                                   | Périmètre                                     | Délai estimé |
+| ------------------- | --------------------------------------- | --------------------------------------------- | ------------ |
+| ✅ **Terminé**      | Phase 1 — Fondations & Auth             | Socle technique, authentification, schéma BDD | 2 semaines   |
+| 🟢 **En cours**     | Phase 2 — Comptes & Dashboard           | Gestion des comptes, vue consolidée           | 2 semaines   |
+| 🟡 **Planifié**     | Phase 3 — Transactions & Catégorisation | Saisie, filtres, moteur de catégorisation     | 3 semaines   |
+| 🔴 **À venir**      | Phase 4 — Budgets & Alertes             | Limites par catégorie, notifications          | 2 semaines   |
+| 🔴 **À venir**      | Phase 5 — Analyse & Rapports            | Rapports mensuels, comparaisons, export       | 3 semaines   |
 
 ---
 
-### Phase 1 — Fondations & Authentification
+### Phase 1 — Fondations & Authentification ✅
 
-#### 1.1 Initialisation du Projet
+#### 1.1 Initialisation du Projet ✅
 
-- Configuration Next.js 16, TypeScript Strict, Tailwind CSS 4, ESLint + Prettier
-- Configuration Prisma avec connecteur MongoDB
+- Configuration Next.js 16 (Turbopack), TypeScript Strict, Tailwind CSS 4, ESLint + Prettier
+- Configuration Prisma avec connecteur MongoDB Atlas
 - Mise en place des variables d'environnement (`.env.local`)
 - Clean start : suppression des fichiers de démo Next.js
 
-#### 1.2 Système d'Authentification
+#### 1.2 Système d'Authentification ✅
 
 - Inscription avec Email & Password (hashage bcrypt, validation Zod)
-- Connexion via OAuth Google (Auth.js v5)
-- Session sécurisée via **HttpOnly Cookies** (JWT)
-- Middleware de protection des routes privées (`/dashboard/**`)
-- Page de réinitialisation du mot de passe par email
+- Connexion Email & Password avec session JWT
+- Session sécurisée via **HttpOnly Cookie** (JWT signé via `next-auth/jwt`, durée 7 jours)
+- Protection des routes privées via `proxy.ts` (convention Next.js 16, remplace `middleware.ts`)
+- Déconnexion via `logoutAction` (suppression du cookie de session)
+- Feedback utilisateur via système de toasts (Sonner) après connexion/inscription
 
-#### 1.3 Schéma de Base de Données Initial
+#### 1.3 Sécurité Renforcée ✅ _(ajout par rapport au plan initial)_
 
-- `User` : `id`, `email`, `password`, `name`, `image`, `createdAt`, `updatedAt`
+- **Rate limiting IP** : 5 tentatives max / 15 min par IP (`lib/rate-limit.ts`)
+- **Verrouillage de compte** : compte bloqué 15 min après 5 échecs consécutifs (stocké en base)
+- **Headers HTTP de sécurité** : CSP, X-Frame-Options DENY, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, HSTS (production)
+- Messages d'erreur génériques (pas de fuite d'information sur l'existence d'un email)
+
+#### 1.4 Schéma de Base de Données Initial ✅
+
+- `User` : `id`, `email`, `passwordHash`, `name`, `image`, `emailVerified`, `loginAttempts`, `lockedUntil`
 - `Account` (OAuth) : conformité Auth.js, relation vers `User`
-- `Session`, `VerificationToken` : requis par Auth.js
+- `Session`, `VerificationToken` : prévus pour Auth.js / future OAuth
+
+#### 1.5 Pages & UI ✅
+
+- Page d'accueil / Landing page (`/`)
+- Page de connexion (`/login`) — formulaire animé, validation temps réel
+- Page d'inscription (`/register`) — formulaire avec indicateurs de sécurité
+- Page 404 custom (`/not-found.tsx`)
+- Dashboard scaffold (`/dashboard`) — protégé par `proxy.ts`
 
 ---
 
@@ -339,103 +355,141 @@ Tech level   : Élevé
 
 ### 6.1 Stack Technologique
 
-| Couche               | Technologie  | Version | Justification                                          |
-| -------------------- | ------------ | ------- | ------------------------------------------------------ |
-| **Framework**        | Next.js      | 16.x    | App Router, Server Actions, streaming SSR via Suspense |
-| **Langage**          | TypeScript   | Strict  | Type-safety de bout en bout, erreurs à la compilation  |
-| **Base de données**  | MongoDB      | 7.x     | Flexibilité du schéma NoSQL pour données financières   |
-| **ORM**              | Prisma       | 7.x     | Requêtes type-safe, migrations, client auto-généré     |
-| **Authentification** | Auth.js      | 4.x     | Sessions HttpOnly, OAuth providers, JWT sécurisé       |
-| **Validation**       | Zod          | 4.x     | Schémas partagés frontend/backend, parsing sécurisé    |
-| **Styling**          | Tailwind CSS | 4.x     | Utility-first, design system cohérent                  |
-| **Composants**       | Shadcn/ui    | Latest  | Headless, accessible (ARIA), personnalisable           |
-| **État client**      | Zustand      | 5.x     | Léger, minimal, pour état global UI uniquement         |
-| **Icônes**           | Lucide React | Latest  | Cohérence visuelle, tree-shakable                      |
+| Couche               | Technologie    | Version | Justification                                          |
+| -------------------- | -------------- | ------- | ------------------------------------------------------ |
+| **Framework**        | Next.js        | 16.x    | App Router, Server Actions, Turbopack, proxy.ts        |
+| **Langage**          | TypeScript     | Strict  | Type-safety de bout en bout, erreurs à la compilation  |
+| **Base de données**  | MongoDB        | Atlas   | Flexibilité du schéma NoSQL pour données financières   |
+| **ORM**              | Prisma         | 6.x     | Requêtes type-safe, migrations, client auto-généré     |
+| **Auth (sessions)**  | next-auth/jwt  | 4.x     | Signature JWT, sessions HttpOnly Cookie custom         |
+| **Validation**       | Zod            | 4.x     | Schémas partagés frontend/backend, parsing sécurisé    |
+| **Styling**          | Tailwind CSS   | 4.x     | Utility-first, design system cohérent                  |
+| **Composants**       | Shadcn/ui      | Latest  | Headless, accessible (ARIA), personnalisable           |
+| **Animations**       | Framer Motion  | 12.x    | Animations fluides pour l'UI                           |
+| **État client**      | Zustand        | 5.x     | Léger, minimal, pour état global UI uniquement         |
+| **Notifications**    | Sonner         | 2.x     | Toasts accessibles, intégrés au Root Layout            |
+| **Icônes**           | Lucide React   | Latest  | Cohérence visuelle, tree-shakable                      |
 
-### 6.2 Structure du Projet
+### 6.2 Structure Actuelle du Projet
 
 ```
 aureo/
 ├── app/
-│   ├── (auth)/
-│   │   ├── login/          # Page de connexion
-│   │   ├── register/       # Page d'inscription
-│   │   └── reset-password/ # Réinitialisation mot de passe
-│   ├── (dashboard)/
-│   │   ├── layout.tsx      # Layout protégé (auth requise)
-│   │   ├── page.tsx        # Dashboard principal
-│   │   ├── accounts/       # Gestion des comptes
-│   │   ├── transactions/   # Liste et saisie des transactions
-│   │   ├── budgets/        # Gestion des budgets
-│   │   └── reports/        # Rapports et analyses
+│   ├── (private)/              # Groupe de routes privées (URL non préfixées)
+│   │   └── dashboard/
+│   │       └── page.tsx        # Dashboard principal (protégé par proxy.ts)
+│   ├── auth/
+│   │   └── actions.ts          # Server Actions : register, login, logout
 │   ├── api/
-│   │   └── auth/           # Endpoints Auth.js
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Landing page publique
+│   │   ├── login/route.ts      # API route login (legacy)
+│   │   └── register/route.ts   # API route register (legacy)
+│   ├── login/
+│   │   ├── page.tsx            # Page de connexion
+│   │   └── components/
+│   │       └── LoginForm.tsx
+│   ├── register/
+│   │   ├── page.tsx            # Page d'inscription
+│   │   └── components/
+│   │       ├── RegisterForm.tsx
+│   │       ├── BrandingContent.tsx
+│   │       ├── FormInput.tsx
+│   │       └── TrustBadges.tsx
+│   ├── not-found.tsx           # Page 404 custom
+│   ├── layout.tsx              # Root layout (Toaster, ToastHandler)
+│   ├── page.tsx                # Landing page publique
+│   └── globals.css
 ├── components/
-│   ├── ui/                 # Composants Shadcn/ui (générés)
-│   ├── layout/             # Header, Sidebar, Footer
-│   ├── dashboard/          # Composants spécifiques au dashboard
-│   ├── transactions/       # Composants transactions
-│   └── charts/             # Composants de visualisation
+│   ├── home/                   # Composants de la landing page
+│   │   ├── home.tsx
+│   │   └── components/         # hero, header, features, pricing…
+│   └── ToastHandler.tsx        # Lecteur de params ?success=/?error=
 ├── lib/
-│   ├── prisma.ts           # Client Prisma (singleton)
-│   ├── auth.ts             # Configuration Auth.js
-│   ├── utils.ts            # Utilitaires généraux (cn, formatters…)
-│   └── constants.ts        # Catégories, constantes métier
-├── actions/
-│   ├── auth.ts             # Server Actions : login, register
-│   ├── accounts.ts         # Server Actions : CRUD comptes
-│   ├── transactions.ts     # Server Actions : CRUD transactions
-│   └── budgets.ts          # Server Actions : CRUD budgets
-├── services/
-│   ├── categorization.ts   # Moteur de catégorisation
-│   ├── analytics.ts        # Calculs et agrégations
-│   └── reports.ts          # Génération des rapports
-├── hooks/                  # Custom hooks React
-├── types/                  # Types TypeScript globaux
-├── schemas/                # Schémas Zod partagés
+│   ├── prisma.ts               # Client Prisma (singleton)
+│   ├── auth.ts                 # Logique register/login + lockout
+│   ├── session.ts              # Gestion session JWT (cookie HTTP-only, 7j)
+│   └── rate-limit.ts           # Rate limiting IP en mémoire (5/15min)
+├── proxy.ts                    # Protection routes privées (Next.js 16)
+├── next.config.ts              # Headers HTTP de sécurité
 ├── prisma/
-│   └── schema.prisma       # Schéma de base de données
-└── public/                 # Assets statiques
+│   └── schema.prisma           # Schéma BDD
+└── public/                     # Assets statiques (logo, images)
 ```
 
-### 6.3 Schéma de Base de Données Complet
+### 6.3 Schéma de Base de Données
+
+#### Schéma actuel (Phase 1 — implémenté)
 
 ```prisma
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
-  password      String?
+  id            String    @id @default(uuid()) @map("_id")
   name          String?
+  email         String?   @unique
+  emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  passwordHash  String?
+
+  // Sécurité : verrouillage de compte
+  loginAttempts Int       @default(0)
+  lockedUntil   DateTime?
 
   accounts      Account[]
   sessions      Session[]
-  bankAccounts  BankAccount[]
-  budgets       Budget[]
-  categRules    CategorizationRule[]
 }
 
+model Account {
+  id                String  @id @default(uuid()) @map("_id")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         String   @id @default(uuid()) @map("_id")
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@index([identifier])
+}
+```
+
+#### Schéma cible (Phases 2–3 — à implémenter)
+
+```prisma
 model BankAccount {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  id          String      @id @default(uuid()) @map("_id")
   name        String
   type        AccountType
   balance     Float
-  currency    String        @default("EUR")
-  isArchived  Boolean       @default(false)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  userId       String       @db.ObjectId
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency    String      @default("EUR")
+  isArchived  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
 }
 
 model Transaction {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String          @id @default(uuid()) @map("_id")
   amount        Float
   type          TransactionType
   description   String
@@ -443,65 +497,37 @@ model Transaction {
   category      Category        @default(OTHER)
   isRecurring   Boolean         @default(false)
   createdAt     DateTime        @default(now())
-
-  bankAccountId String          @db.ObjectId
+  bankAccountId String
   bankAccount   BankAccount     @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
 }
 
 model Budget {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid()) @map("_id")
   category  Category
   amount    Float
   month     Int
   year      Int
   createdAt DateTime @default(now())
-
-  userId    String   @db.ObjectId
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([userId, category, month, year])
 }
 
 model CategorizationRule {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid()) @map("_id")
   keyword   String
   category  Category
   createdAt DateTime @default(now())
-
-  userId    String   @db.ObjectId
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum AccountType {
-  CHECKING
-  SAVINGS
-  LIVRET
-  INVESTMENT
-  OTHER
-}
-
-enum TransactionType {
-  DEBIT
-  CREDIT
-}
-
+enum AccountType  { CHECKING SAVINGS LIVRET INVESTMENT OTHER }
+enum TransactionType { DEBIT CREDIT }
 enum Category {
-  FOOD
-  TRANSPORT
-  HOUSING
-  HEALTH
-  LEISURE
-  SHOPPING
-  SUBSCRIPTIONS
-  INCOME
-  SAVINGS
-  OTHER
+  FOOD TRANSPORT HOUSING HEALTH LEISURE
+  SHOPPING SUBSCRIPTIONS INCOME SAVINGS OTHER
 }
-
-// Modèles Auth.js (obligatoires)
-model Account { ... }
-model Session { ... }
-model VerificationToken { ... }
 ```
 
 ### 6.4 Flux de Données
@@ -509,11 +535,13 @@ model VerificationToken { ... }
 ```
 Client (Browser)
     │
-    ├─ Server Component ──→ Prisma ──→ MongoDB
+    ├─ Server Component ──→ Prisma ──→ MongoDB Atlas
     │       (lecture directe, pas d'API REST)
     │
-    └─ Server Action ──→ Zod (validation) ──→ Prisma ──→ MongoDB
-            (mutation, appelée depuis un formulaire ou un bouton)
+    └─ Server Action ──→ Zod (validation) ──→ Prisma ──→ MongoDB Atlas
+            │
+            └─ proxy.ts (Edge) ──→ Vérification JWT cookie
+                    (redirection /login si session invalide)
 ```
 
 ---
@@ -540,7 +568,7 @@ Palette de couleurs
 └── Fond        : #F8F6F0 (blanc cassé — douceur, lisibilité)
 
 Typographie
-├── Police      : Inter (variable)
+├── Police      : Geist Sans / Geist Mono (next/font/google, auto-hébergé)
 ├── Titre H1    : 32px, Bold, #1A1A2E
 ├── Titre H2    : 24px, SemiBold, #1A1A2E
 ├── Corps       : 16px, Regular, #374151
@@ -567,11 +595,11 @@ Border-radius : 8px (cards), 6px (boutons), 4px (inputs), 999px (badges)
 - Version monochrome claire : à utiliser sur fonds sombres (`#1A1A2E` ou équivalents).
 - Aucune recolorisation arbitraire : seules les variantes définies ci-dessus sont autorisées.
 
-**Tableau d’usage recommandé :**
+**Tableau d'usage recommandé :**
 
 | Contexte                                    | Variante de logo               |
 | ------------------------------------------- | ------------------------------ |
-| Header de l’application / landing page      | Logo complet couleur           |
+| Header de l'application / landing page      | Logo complet couleur           |
 | Écran de connexion / onboarding             | Logo complet couleur           |
 | Favicon, avatar utilisateur, icône compacte | Icône seule couleur            |
 | Sections sur fond très clair ou documents   | Logo complet monochrome sombre |
@@ -609,9 +637,10 @@ Border-radius : 8px (cards), 6px (boutons), 4px (inputs), 999px (badges)
 **Comportements :**
 
 - Validation en temps réel des champs (email valide, mot de passe ≥ 8 caractères)
-- Message d'erreur inline en cas d'identifiants incorrects
+- Toast d'erreur inline en cas d'identifiants incorrects (via `useActionState`)
+- Toast de succès "Connexion réussie !" après redirection vers `/dashboard`
+- Compte verrouillé : message indiquant le temps restant avant déblocage
 - Redirection vers `/dashboard` après connexion réussie
-- Redirection vers `/dashboard` si déjà authentifié
 
 ---
 
@@ -759,15 +788,19 @@ Le modèle retenu est le **freemium** : une offre gratuite généreuse pour l'ac
 
 > **Principe Zero Trust :** toute entrée utilisateur est considérée non fiable jusqu'à validation explicite.
 
-| Domaine           | Exigence                                                      |
-| ----------------- | ------------------------------------------------------------- |
-| **Validation**    | Schémas Zod sur chaque Server Action, sans exception          |
-| **Mots de passe** | Hashage bcrypt (cost factor ≥ 12)                             |
-| **Sessions**      | HttpOnly Cookies, SameSite=Strict, expiration 30 jours        |
-| **Headers HTTP**  | CSP, X-Frame-Options: DENY, HSTS, X-Content-Type-Options      |
-| **Données**       | Chiffrement AES-256 des données financières sensibles en base |
-| **Tokens**        | Rotation des refresh tokens, invalidation sur déconnexion     |
-| **Logs**          | Journalisation des tentatives de connexion échouées           |
+| Domaine                  | Exigence                                                                | Statut |
+| ------------------------ | ----------------------------------------------------------------------- | ------ |
+| **Validation**           | Schémas Zod sur chaque Server Action, sans exception                    | ✅     |
+| **Mots de passe**        | Hashage bcrypt (cost factor 10)                                         | ✅     |
+| **Sessions**             | HttpOnly Cookie, SameSite=Lax, JWT signé, expiration 7 jours           | ✅     |
+| **Headers HTTP**         | CSP, X-Frame-Options DENY, HSTS, X-Content-Type-Options, Referrer-Policy | ✅   |
+| **Rate limiting**        | 5 tentatives / 15 min par IP, blocage automatique                       | ✅     |
+| **Verrouillage compte**  | Compte bloqué 15 min après 5 échecs consécutifs (stocké en base)        | ✅     |
+| **Fuite d'information**  | Messages d'erreur génériques (email existant/inexistant indifférenciés) | ✅     |
+| **Protection routes**    | proxy.ts vérifie le JWT avant chaque accès aux routes privées           | ✅     |
+| **Données financières**  | Chiffrement AES-256 des données sensibles en base                       | ⏳ Phase 2 |
+| **Tokens OAuth**         | Rotation des refresh tokens, invalidation sur déconnexion               | ⏳ Phase 1b |
+| **Reset mot de passe**   | Lien de réinitialisation par email avec token expirant                  | ⏳ Phase 1b |
 
 ### 9.2 Performance
 
@@ -821,67 +854,77 @@ Le modèle retenu est le **freemium** : une offre gratuite généreuse pour l'ac
 
 ### 10.1 Checklist de Démarrage
 
-- [ ] Créer le dépôt GitHub (`aureo`) avec `.gitignore` Node
-- [ ] Initialiser Next.js 15 : `npx create-next-app@latest aureo --typescript --tailwind --eslint --app --src-dir no`
-- [ ] Installer les dépendances :
-  ```bash
-  npm install prisma @prisma/client @auth/prisma-adapter next-auth@beta zod bcryptjs
-  npm install -D @types/bcryptjs prettier eslint-config-prettier
-  ```
-- [ ] Configurer Prettier (`.prettierrc`)
-- [ ] Configurer les variables d'environnement (`.env.local`) :
+- [x] Créer le dépôt GitHub (`aureo`) avec `.gitignore` Node
+- [x] Initialiser Next.js 16 avec Turbopack : `npx create-next-app@latest`
+- [x] Installer les dépendances (prisma, next-auth, zod, bcrypt, sonner, framer-motion…)
+- [x] Configurer Prettier + ESLint
+- [x] Configurer les variables d'environnement (`.env.local`) :
   ```env
   DATABASE_URL="mongodb+srv://..."
-  NEXTAUTH_SECRET="..."
+  NEXTAUTH_SECRET="..."   # ⚠️ À remplacer par une valeur forte en production
   NEXTAUTH_URL="http://localhost:3000"
-  GOOGLE_CLIENT_ID="..."
-  GOOGLE_CLIENT_SECRET="..."
   ```
-- [ ] Initialiser Prisma : `npx prisma init --datasource-provider mongodb`
-- [ ] Créer le schéma Prisma initial (`User`, `Account`, `Session`, `VerificationToken`)
-- [ ] Créer le client Prisma singleton (`lib/prisma.ts`)
-- [ ] Configurer Auth.js v5 (`lib/auth.ts`, `app/api/auth/[...nextauth]/route.ts`)
-- [ ] Créer les pages `/login` et `/register` avec validation Zod
-- [ ] Implémenter les Server Actions d'authentification (`actions/auth.ts`)
-- [ ] Configurer le middleware de protection des routes (`middleware.ts`)
-- [ ] Tester : inscription, connexion email, connexion Google, protection routes
+- [x] Initialiser Prisma avec connecteur MongoDB
+- [x] Créer le schéma Prisma initial (`User`, `Account`, `Session`, `VerificationToken`)
+- [x] Ajouter les champs de sécurité sur `User` (`loginAttempts`, `lockedUntil`)
+- [x] Créer le client Prisma singleton (`lib/prisma.ts`)
+- [x] Implémenter l'authentification custom (`lib/auth.ts`) : register + login + bcrypt + Zod
+- [x] Implémenter la gestion de session JWT (`lib/session.ts`)
+- [x] Implémenter le rate limiting IP (`lib/rate-limit.ts`)
+- [x] Créer les Server Actions (`app/auth/actions.ts`) : registerAction, loginAction, logoutAction
+- [x] Créer les pages `/login` et `/register` avec validation Zod et toasts
+- [x] Configurer `proxy.ts` pour la protection des routes privées (`/dashboard/**`)
+- [x] Ajouter les headers HTTP de sécurité (`next.config.ts`)
+- [x] Créer le scaffold du dashboard (`app/(private)/dashboard/page.tsx`)
+- [x] Créer la page 404 custom
+- [ ] Configurer OAuth Google (US-02)
+- [ ] Implémenter la réinitialisation de mot de passe par email (US-04)
+- [ ] Rediriger vers `/dashboard` si déjà authentifié sur `/login`
 - [ ] Déployer sur Vercel (preview)
 
 ### 10.2 Critères d'Acceptance — Phase 1
 
-| Scénario                             | Résultat attendu                                   |
-| ------------------------------------ | -------------------------------------------------- |
-| Inscription avec email valide        | Compte créé, redirection vers `/dashboard`         |
-| Inscription avec email déjà utilisé  | Message d'erreur "Email déjà utilisé"              |
-| Connexion avec identifiants corrects | Session créée, redirection vers `/dashboard`       |
-| Connexion avec mauvais mot de passe  | Message d'erreur générique (pas de fuite d'info)   |
-| Connexion Google                     | Compte créé/associé, redirection vers `/dashboard` |
-| Accès à `/dashboard` sans session    | Redirection vers `/login`                          |
-| Accès à `/login` avec session active | Redirection vers `/dashboard`                      |
+| Scénario                             | Résultat attendu                                        | Statut |
+| ------------------------------------ | ------------------------------------------------------- | ------ |
+| Inscription avec email valide        | Compte créé, toast succès, retour sur /register         | ✅     |
+| Inscription avec email déjà utilisé  | Message d'erreur "Un compte existe déjà avec cet email" | ✅     |
+| Connexion avec identifiants corrects | Session créée, toast "Connexion réussie", /dashboard    | ✅     |
+| Connexion avec mauvais mot de passe  | Message générique + compteur tentatives restantes       | ✅     |
+| 5 échecs consécutifs                 | Compte verrouillé 15 min, message explicite             | ✅     |
+| Trop de tentatives depuis même IP    | Blocage IP 15 min, message explicite                    | ✅     |
+| Connexion Google                     | Compte créé/associé, redirection vers /dashboard        | ⏳     |
+| Accès à `/dashboard` sans session    | Redirection vers `/login` (proxy.ts)                    | ✅     |
+| Accès à `/login` avec session active | Redirection vers `/dashboard`                           | ⏳     |
+| Déconnexion                          | Cookie supprimé, redirection vers `/login`              | ✅     |
 
 ---
 
 ## 11. Glossaire
 
-| Terme                | Définition                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------------------- |
-| **App Router**       | Système de routing de Next.js 15 basé sur le répertoire `/app`, avec Server Components par défaut |
-| **Server Action**    | Fonction serveur appelée directement depuis un composant client, sans API REST intermédiaire      |
-| **Server Component** | Composant React rendu exclusivement côté serveur, sans JavaScript côté client                     |
-| **Zero Trust**       | Principe de sécurité où aucune entrée n'est considérée fiable sans validation explicite           |
-| **HttpOnly Cookie**  | Cookie inaccessible depuis JavaScript, protégeant contre les attaques XSS                         |
-| **Prisma ORM**       | Outil de mapping objet-relationnel permettant d'interagir avec la base de données via TypeScript  |
-| **Zod**              | Bibliothèque de validation de schémas TypeScript-first                                            |
-| **DSP2**             | Directive européenne sur les services de paiement, permettant l'Open Banking                      |
-| **LCP / FID / CLS**  | Métriques Core Web Vitals de Google mesurant la performance perçue d'une page web                 |
-| **bcrypt**           | Algorithme de hashage de mots de passe, résistant aux attaques par force brute                    |
-| **JWT**              | JSON Web Token — format de token d'authentification signé et vérifiable                           |
-| **Freemium**         | Modèle économique avec une offre gratuite et une offre payante premium                            |
-| **WAU**              | Weekly Active Users — utilisateurs actifs sur une semaine glissante                               |
-| **MRR**              | Monthly Recurring Revenue — revenu mensuel récurrent                                              |
+| Terme                | Définition                                                                                          |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| **App Router**       | Système de routing de Next.js 16 basé sur le répertoire `/app`, avec Server Components par défaut  |
+| **Server Action**    | Fonction serveur appelée directement depuis un composant client, sans API REST intermédiaire        |
+| **Server Component** | Composant React rendu exclusivement côté serveur, sans JavaScript côté client                       |
+| **proxy.ts**         | Fichier de protection des routes (Next.js 16), remplace l'ancien `middleware.ts`                    |
+| **Zero Trust**       | Principe de sécurité où aucune entrée n'est considérée fiable sans validation explicite             |
+| **HttpOnly Cookie**  | Cookie inaccessible depuis JavaScript, protégeant contre les attaques XSS                           |
+| **Rate Limiting**    | Limitation du nombre de requêtes par source (IP) sur une période donnée                             |
+| **Account Lockout**  | Verrouillage temporaire d'un compte après un nombre trop élevé d'échecs de connexion                |
+| **Prisma ORM**       | Outil de mapping objet-relationnel permettant d'interagir avec la base de données via TypeScript    |
+| **Zod**              | Bibliothèque de validation de schémas TypeScript-first                                              |
+| **DSP2**             | Directive européenne sur les services de paiement, permettant l'Open Banking                        |
+| **LCP / FID / CLS**  | Métriques Core Web Vitals de Google mesurant la performance perçue d'une page web                   |
+| **bcrypt**           | Algorithme de hashage de mots de passe, résistant aux attaques par force brute                      |
+| **JWT**              | JSON Web Token — format de token d'authentification signé et vérifiable                             |
+| **Freemium**         | Modèle économique avec une offre gratuite et une offre payante premium                              |
+| **WAU**              | Weekly Active Users — utilisateurs actifs sur une semaine glissante                                 |
+| **MRR**              | Monthly Recurring Revenue — revenu mensuel récurrent                                                |
+| **CSP**              | Content Security Policy — header HTTP limitant les sources de scripts, styles et médias autorisées  |
+| **HSTS**             | HTTP Strict Transport Security — force le navigateur à utiliser HTTPS uniquement                    |
 
 ---
 
 _Ce document constitue la référence technique et fonctionnelle du projet Aureo. Il est mis à jour à la fin de chaque phase, avant le démarrage de la suivante._
 
-_Version 2.0.0 — Février 2026 — Usage interne / Portfolio_
+_Version 2.1.0 — Février 2026 — Usage interne / Portfolio_
