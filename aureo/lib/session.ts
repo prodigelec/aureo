@@ -1,5 +1,7 @@
 import { decode, encode } from "next-auth/jwt";
 import { cookies } from "next/headers";
+import { cache } from "react";
+import { prisma } from "@/lib/prisma";
 
 const COOKIE_NAME = "auth-session";
 const SECRET = process.env.NEXTAUTH_SECRET!;
@@ -38,3 +40,17 @@ export async function getSession() {
     return null;
   }
 }
+
+/**
+ * Récupère l'utilisateur courant depuis la session.
+ * Utilise React cache() pour dédupliquer les appels DB dans un même rendu.
+ */
+export const getCurrentUser = cache(async () => {
+  const session = await getSession();
+  if (!session?.sub) return null;
+
+  return prisma.user.findUnique({
+    where: { id: session.sub },
+    select: { id: true, name: true, email: true },
+  });
+});
