@@ -156,6 +156,9 @@ export async function registerUser(input: unknown): Promise<AuthError | AuthSucc
   };
 }
 
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+
 export async function loginUser(input: unknown): Promise<AuthError | AuthSuccess<LoginUser>> {
   const parsed = loginSchema.safeParse(input);
 
@@ -169,6 +172,7 @@ export async function loginUser(input: unknown): Promise<AuthError | AuthSuccess
     where: { email },
   });
 
+  // Réponse générique pour ne pas révéler si l'email existe
   if (!user || !user.passwordHash) {
     return {
       success: false,
@@ -177,15 +181,52 @@ export async function loginUser(input: unknown): Promise<AuthError | AuthSuccess
     };
   }
 
+  // Vérification du verrouillage de compte
+  if (user.lockedUntil && user.lockedUntil > new Date()) {
+    const retryAfterMin = Math.ceil(
+      (user.lockedUntil.getTime() - Date.now()) / 60000,
+    );
+    return {
+      success: false,
+      status: 423,
+      message: `Compte temporairement verrouillé. Réessayez dans ${retryAfterMin} min.`,
+    };
+  }
+
   const validPassword = await bcrypt.compare(password, user.passwordHash);
 
   if (!validPassword) {
+    const newAttempts = user.loginAttempts + 1;
+    const shouldLock = newAttempts >= MAX_LOGIN_ATTEMPTS;
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        loginAttempts: newAttempts,
+        lockedUntil: shouldLock ? new Date(Date.now() + LOCK_DURATION_MS) : null,
+      },
+    });
+
+    if (shouldLock) {
+      return {
+        success: false,
+        status: 423,
+        message: "Trop de tentatives. Compte verrouillé 15 minutes.",
+      };
+    }
+
     return {
       success: false,
       status: 401,
-      message: "Identifiants invalides",
+      message: `Identifiants invalides (${MAX_LOGIN_ATTEMPTS - newAttempts} tentative(s) restante(s))`,
     };
   }
+
+  // Succès — réinitialiser le compteur
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { loginAttempts: 0, lockedUntil: null },
+  });
 
   return {
     success: true,
