@@ -1,8 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { loginUser, registerUser } from "@/lib/auth";
+import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
+import { createSession, deleteSession } from "@/lib/session";
 
 export async function registerAction(prevState: any, formData: FormData) {
   const name = formData.get("name") as string;
@@ -27,18 +30,36 @@ export async function registerAction(prevState: any, formData: FormData) {
 }
 
 export async function loginAction(prevState: any, formData: FormData) {
+  const reqHeaders = await headers();
+  const ip =
+    reqHeaders.get("x-forwarded-for")?.split(",")[0].trim() ??
+    reqHeaders.get("x-real-ip") ??
+    "unknown";
+
+  const rateLimit = checkRateLimit(`login:${ip}`);
+  if (!rateLimit.allowed) {
+    return {
+      success: false,
+      message: `Trop de tentatives. Réessayez dans ${Math.ceil(rateLimit.retryAfterSeconds / 60)} min.`,
+    };
+  }
+
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const result = await loginUser({
-    email,
-    password,
-  });
+  const result = await loginUser({ email, password });
 
   if (!result.success) {
     return { success: false, message: result.message };
   }
 
-  redirect("/dashboard");
+  // Succès : on efface le compteur IP
+  resetRateLimit(`login:${ip}`);
+  await createSession(result.data.id);
+  redirect("/dashboard?success=" + encodeURIComponent("Connexion réussie ! Bienvenue."));
 }
 
+export async function logoutAction() {
+  await deleteSession();
+  redirect("/login");
+}
