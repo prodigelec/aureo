@@ -191,7 +191,7 @@ Tech level   : Élevé
 
 | #     | User Story                                                                                                                                                                             | Persona       | Priorité | Statut |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------ |
-| US-05 | En tant qu'utilisateur, je veux ajouter un compte bancaire manuellement (nom, type, solde), afin d'avoir une base de départ même sans synchronisation.                                 | Tous          | 🔴       | ⏳ Phase 2 |
+| US-05 | En tant qu'utilisateur, je veux ajouter un compte bancaire manuellement (nom, type, devise, solde, IBAN optionnel), afin d'avoir une base de départ même sans synchronisation.        | Tous          | 🔴       | ⏳ Phase 2 |
 | US-06 | En tant qu'utilisateur, je veux voir le solde consolidé de tous mes comptes sur une seule page, afin d'avoir une vision globale instantanée.                                           | Lucas, Sophie | 🔴       | ⏳ Phase 2 |
 | US-07 | En tant qu'utilisateur, je veux archiver un compte que je n'utilise plus, afin de garder mon dashboard propre sans perdre l'historique.                                                | Sophie        | 🟡       | ⏳ Phase 2 |
 
@@ -282,7 +282,7 @@ Tech level   : Élevé
 
 #### 2.1 Gestion des Comptes
 
-- Création d'un compte : nom, type (courant, épargne, livret…), devise, solde initial
+- Création d'un compte : nom, type (courant, épargne, livret…), devise, solde initial, IBAN optionnel
 - Édition et archivage d'un compte
 - Calcul du solde total consolidé
 
