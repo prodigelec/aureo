@@ -36,7 +36,7 @@ const securityHeaders = [
       "img-src 'self' data: blob: https:",
       // next/font/google auto-héberge les polices → pas besoin de fonts.gstatic.com
       "font-src 'self' data:",
-      "connect-src 'self'",
+      "connect-src 'self' https://autocomplete.clearbit.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",

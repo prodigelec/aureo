@@ -52,11 +52,11 @@ model BankAccount {
 }
 
 enum AccountType {
-  CHECKING
-  SAVINGS
+  COURANT
+  EPARGNE
   LIVRET
-  INVESTMENT
-  OTHER
+  INVESTISSEMENT
+  AUTRE
 }
 
 model Account {

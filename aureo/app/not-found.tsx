@@ -73,7 +73,7 @@ export default function NotFound() {
                         <h2 className="mb-4 text-2xl font-bold">Court-circuit...</h2>
 
                         <p className="mb-8 text-sm text-muted-foreground md:text-base">
-                            Il semblerait que nous ayons perdu la connexion. La page que vous cherchez n'existe plus ou la clé a été égarée. Le système Aureo ne trouve rien !
+                            Il semblerait que nous ayons perdu la connexion. La page que vous cherchez n&apos;existe plus ou la clé a été égarée. Le système Aureo ne trouve rien !
                         </p>
 
                         <Link
@@ -81,7 +81,7 @@ export default function NotFound() {
                             className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-primary to-purple-600 px-8 py-3.5 font-bold text-white shadow-xl shadow-primary/30 transition-all hover:-translate-y-0.5 hover:brightness-110 active:scale-95 sm:w-auto"
                         >
                             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                            Retour à l'accueil
+                            Retour à l&apos;accueil
                         </Link>
                     </motion.div>
                 </motion.div>

@@ -21,12 +21,40 @@ function generateFakeIBAN(): string {
 
 // ─── Schéma de validation ─────────────────────────────────────────────────────
 
+const ACCOUNT_TYPES = ["COURANT", "EPARGNE", "LIVRET", "INVESTISSEMENT", "AUTRE"] as const;
+type AccountType = (typeof ACCOUNT_TYPES)[number];
+
+const normalizeText = (value: unknown) =>
+  value == null ? "" : String(value);
+
+const requiredText = (message: string) =>
+  z.preprocess(normalizeText, z.string().trim().min(1, message));
+
+const requiredTextMax = (message: string, max: number, maxMessage: string) =>
+  z.preprocess(
+    normalizeText,
+    z.string().trim().min(1, message).max(max, maxMessage)
+  );
+
+const accountTypeSchema: z.ZodType<AccountType> = z
+  .preprocess((v) => (v == null ? "" : String(v)), z.string().trim())
+  .refine((v) => v.length > 0, "Type de compte requis")
+  .refine((v) => ACCOUNT_TYPES.includes(v as AccountType), "Type de compte invalide")
+  .transform((v) => v as AccountType);
+
 const AddBankAccountSchema = z.object({
-  bankName: z.string().min(1, "Nom de la banque requis"),
-  bankDomain: z.string().min(1),
-  accountName: z.string().min(1, "Nom du compte requis").max(50),
-  accountType: z.enum(["CHECKING", "SAVINGS", "LIVRET", "INVESTMENT", "OTHER"]),
-  balance: z.coerce.number().min(0, "Le solde doit être positif"),
+  bankName: requiredText("Nom de la banque requis"),
+  bankDomain: requiredText("Domaine de la banque requis"),
+  accountName: requiredTextMax(
+    "Nom du compte requis",
+    50,
+    "Nom du compte trop long"
+  ),
+  accountType: accountTypeSchema,
+  balance: requiredText("Solde requis")
+    .transform((v) => parseFloat(v.replace(",", ".")))
+    .refine((v) => !Number.isNaN(v), "Solde invalide")
+    .refine((v) => v > 0, "Le solde doit être supérieur à 0"),
 });
 
 export type AddBankAccountState = {
