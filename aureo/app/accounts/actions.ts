@@ -57,10 +57,57 @@ const AddBankAccountSchema = z.object({
     .refine((v) => v > 0, "Le solde doit être supérieur à 0"),
 });
 
+type AddBankAccountInput = z.infer<typeof AddBankAccountSchema>;
+type AddBankAccountFieldErrors = z.ZodFlattenedError<AddBankAccountInput>["fieldErrors"];
+
 export type AddBankAccountState = {
   success: boolean;
   message: string;
   errors?: Partial<Record<keyof z.infer<typeof AddBankAccountSchema>, string>>;
+};
+
+const getRawFormData = (formData: FormData) => ({
+  bankName: formData.get("bankName"),
+  bankDomain: formData.get("bankDomain"),
+  accountName: formData.get("accountName"),
+  accountType: formData.get("accountType"),
+  balance: formData.get("balance"),
+});
+
+const toErrorState = (fieldErrors: AddBankAccountFieldErrors): AddBankAccountState => ({
+  success: false,
+  message: "Veuillez corriger les erreurs.",
+  errors: {
+    bankName: fieldErrors.bankName?.[0],
+    bankDomain: fieldErrors.bankDomain?.[0],
+    accountName: fieldErrors.accountName?.[0],
+    accountType: fieldErrors.accountType?.[0],
+    balance: fieldErrors.balance?.[0],
+  },
+});
+
+const createBankAccount = async (
+  data: AddBankAccountInput,
+  userId: string
+) => {
+  await prisma.bankAccount.create({
+    data: {
+      name: data.accountName,
+      bankName: data.bankName,
+      bankDomain: data.bankDomain,
+      type: data.accountType,
+      balance: data.balance,
+      iban: generateFakeIBAN(),
+      userId,
+    },
+  });
+};
+
+const markOnboardingComplete = async (userId: string) => {
+  await prisma.user.update({
+    where: { id: userId },
+    data: { onboardingCompleted: true },
+  });
 };
 
 // ─── Server Action ────────────────────────────────────────────────────────────
@@ -74,50 +121,13 @@ export async function addBankAccountAction(
     return { success: false, message: "Non authentifié." };
   }
 
-  const raw = {
-    bankName: formData.get("bankName"),
-    bankDomain: formData.get("bankDomain"),
-    accountName: formData.get("accountName"),
-    accountType: formData.get("accountType"),
-    balance: formData.get("balance"),
-  };
-
-  const parsed = AddBankAccountSchema.safeParse(raw);
+  const parsed = AddBankAccountSchema.safeParse(getRawFormData(formData));
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
-    return {
-      success: false,
-      message: "Veuillez corriger les erreurs.",
-      errors: {
-        bankName: fieldErrors.bankName?.[0],
-        bankDomain: fieldErrors.bankDomain?.[0],
-        accountName: fieldErrors.accountName?.[0],
-        accountType: fieldErrors.accountType?.[0],
-        balance: fieldErrors.balance?.[0],
-      },
-    };
+    return toErrorState(parsed.error.flatten().fieldErrors);
   }
 
-  const { bankName, bankDomain, accountName, accountType, balance } =
-    parsed.data;
-
-  await prisma.bankAccount.create({
-    data: {
-      name: accountName,
-      bankName,
-      bankDomain,
-      type: accountType,
-      balance,
-      iban: generateFakeIBAN(),
-      userId: session.sub,
-    },
-  });
-
-  // Marquer l'onboarding comme terminé
-  await prisma.user.update({
-    where: { id: session.sub },
-    data: { onboardingCompleted: true },
-  });
+  await createBankAccount(parsed.data, session.sub);
+  await markOnboardingComplete(session.sub);
 
   revalidatePath("/dashboard");
 
