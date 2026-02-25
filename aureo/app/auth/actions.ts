@@ -7,7 +7,16 @@ import { loginUser, registerUser } from "@/lib/auth";
 import { checkRateLimit, resetRateLimit } from "@/lib/rate-limit";
 import { createSession, deleteSession } from "@/lib/session";
 
-export async function registerAction(prevState: any, formData: FormData) {
+export type AuthActionState = {
+  success: boolean;
+  message?: string;
+  fieldErrors?: Record<string, string[]>;
+};
+
+export async function registerAction(
+  _prevState: AuthActionState | null,
+  formData: FormData
+): Promise<AuthActionState | void> {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
@@ -22,14 +31,20 @@ export async function registerAction(prevState: any, formData: FormData) {
     return {
       success: false,
       message: result.message,
-      fieldErrors: "fieldErrors" in result ? result.fieldErrors : undefined
+      fieldErrors: "fieldErrors" in result ? result.fieldErrors : undefined,
     };
   }
 
-  redirect("/register?success=" + encodeURIComponent("Enregistrement de votre compte réussi ! 👍"));
+  redirect(
+    "/register?success=" +
+      encodeURIComponent("Enregistrement de votre compte réussi ! 👍")
+  );
 }
 
-export async function loginAction(prevState: any, formData: FormData) {
+export async function loginAction(
+  _prevState: AuthActionState | null,
+  formData: FormData
+): Promise<AuthActionState | void> {
   const reqHeaders = await headers();
   const ip =
     reqHeaders.get("x-forwarded-for")?.split(",")[0].trim() ??
@@ -50,7 +65,7 @@ export async function loginAction(prevState: any, formData: FormData) {
   const result = await loginUser({ email, password });
 
   if (!result.success) {
-    return { success: false, message: result.message };
+    return { success: false, message: result.message, fieldErrors: result.fieldErrors };
   }
 
   // Succès : on efface le compteur IP

@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation";
 import {
-  ArrowDownRight,
-  ArrowUpRight,
   BarChart3,
   CreditCard,
   PiggyBank,
@@ -14,165 +12,14 @@ import {
 } from "lucide-react";
 
 import { getCurrentUser } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
+import OnboardingModal from "@/components/shared/OnboardingModal";
+import StatCard from "@/components/dashboard/StatCard";
+import EmptyState from "@/components/dashboard/EmptyState";
+import SectionCard from "@/components/dashboard/SectionCard";
+import BudgetBar from "@/components/dashboard/BudgetBar";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type StatCardProps = {
-  label: string;
-  value: string;
-  sub: string;
-  icon: React.ElementType;
-  iconColor: string;
-  iconBg: string;
-  trend?: { value: string; positive: boolean } | null;
-};
-
-// ─── Stat card ────────────────────────────────────────────────────────────────
-
-function StatCard({
-  label,
-  value,
-  sub,
-  icon: Icon,
-  iconColor,
-  iconBg,
-  trend,
-}: StatCardProps) {
-  return (
-    <div className="rounded-2xl border border-border/30 bg-card p-5 flex flex-col gap-4 hover:border-border/60 transition-colors">
-      <div className="flex items-start justify-between">
-        <div className={`p-2.5 rounded-xl ${iconBg}`}>
-          <Icon className={`h-5 w-5 ${iconColor}`} />
-        </div>
-        {trend ? (
-          <span
-            className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-lg ${
-              trend.positive
-                ? "bg-emerald-500/10 text-emerald-400"
-                : "bg-red-500/10 text-red-400"
-            }`}
-          >
-            {trend.positive ? (
-              <ArrowUpRight className="h-3 w-3" />
-            ) : (
-              <ArrowDownRight className="h-3 w-3" />
-            )}
-            {trend.value}
-          </span>
-        ) : (
-          <span className="text-[10px] text-muted-foreground/40 px-2 py-1 rounded-lg bg-white/5">
-            Aucune donnée
-          </span>
-        )}
-      </div>
-      <div>
-        <p className="text-2xl font-black tracking-tight">{value}</p>
-        <p className="text-xs text-muted-foreground mt-1">{sub}</p>
-      </div>
-    </div>
-  );
-}
-
-// ─── Empty state ──────────────────────────────────────────────────────────────
-
-function EmptyState({
-  icon: Icon,
-  title,
-  description,
-  ctaLabel,
-  ctaHref,
-}: {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  ctaLabel?: string;
-  ctaHref?: string;
-}) {
-  return (
-    <div className="flex flex-col items-center justify-center py-10 px-4 text-center gap-4">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
-        <Icon className="h-7 w-7 text-primary/60" />
-      </div>
-      <div>
-        <p className="font-semibold text-sm">{title}</p>
-        <p className="text-xs text-muted-foreground mt-1 max-w-[200px] mx-auto leading-relaxed">
-          {description}
-        </p>
-      </div>
-      {ctaLabel && ctaHref && (
-        <a
-          href={ctaHref}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/15 hover:bg-primary/25 text-primary text-xs font-semibold transition-colors"
-        >
-          <Plus className="h-3.5 w-3.5" />
-          {ctaLabel}
-        </a>
-      )}
-    </div>
-  );
-}
-
-// ─── Section card wrapper ─────────────────────────────────────────────────────
-
-function SectionCard({
-  title,
-  action,
-  children,
-}: {
-  title: string;
-  action?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-2xl border border-border/30 bg-card flex flex-col overflow-hidden">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border/20">
-        <h2 className="font-bold text-sm">{title}</h2>
-        {action}
-      </div>
-      {children}
-    </div>
-  );
-}
-
-// ─── Budget bar ───────────────────────────────────────────────────────────────
-
-function BudgetBar({
-  label,
-  spent,
-  total,
-  emoji,
-}: {
-  label: string;
-  spent: number;
-  total: number;
-  emoji: string;
-}) {
-  const pct = total > 0 ? Math.min((spent / total) * 100, 100) : 0;
-  const color =
-    pct >= 100 ? "bg-red-500" : pct >= 80 ? "bg-amber-500" : "bg-emerald-500";
-
-  return (
-    <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-xs">
-        <span className="flex items-center gap-1.5 font-medium">
-          <span>{emoji}</span>
-          {label}
-        </span>
-        <span className="text-muted-foreground">
-          {spent.toLocaleString("fr-FR")} / {total.toLocaleString("fr-FR")} €
-        </span>
-      </div>
-      <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all ${color}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
+export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -187,6 +34,10 @@ export default async function DashboardPage() {
     year: "numeric",
   });
 
+  const bankAccountCount = await prisma.bankAccount.count({
+    where: { userId: user.id, isArchived: false },
+  });
+
   // Données financières — seront alimentées par la BDD en Phase 2
   const stats = {
     totalBalance: 0,
@@ -195,12 +46,14 @@ export default async function DashboardPage() {
     monthSavings: 0,
   };
 
-  const hasAccounts = false;
+  const hasAccounts = bankAccountCount > 0;
   const hasTransactions = false;
   const hasBudgets = false;
 
   return (
-    <main className="flex-1 p-6 lg:p-8 space-y-8">
+    <>
+      {(!user.onboardingCompleted || !hasAccounts) && <OnboardingModal />}
+      <main className="flex-1 p-6 lg:p-8 space-y-8">
 
       {/* ── En-tête ── */}
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pl-14 lg:pl-0">
@@ -394,5 +247,6 @@ export default async function DashboardPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

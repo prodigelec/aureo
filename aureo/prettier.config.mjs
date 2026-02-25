@@ -1,4 +1,4 @@
-export default {
+const config = {
   plugins: ["prettier-plugin-tailwindcss"],
   printWidth: 100,
   tabWidth: 2,
@@ -8,3 +8,5 @@ export default {
   bracketSpacing: true,
   arrowParens: "always",
 };
+
+export default config;

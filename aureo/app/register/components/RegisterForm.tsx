@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useActionState, useEffect } from "react";
+import { useMemo, useState, useActionState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -20,13 +20,22 @@ export default function RegisterForm() {
         password: "",
     });
 
-    const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+    const [dismissedFields, setDismissedFields] = useState<Set<string>>(
+        () => new Set()
+    );
+
+    const fieldErrors = useMemo(() => {
+        const next: Record<string, string[]> = {};
+        const serverErrors = state?.fieldErrors ?? {};
+        Object.entries(serverErrors).forEach(([key, value]) => {
+            if (!dismissedFields.has(key) && value) {
+                next[key] = value;
+            }
+        });
+        return next;
+    }, [state?.fieldErrors, dismissedFields]);
 
     useEffect(() => {
-        if (state?.fieldErrors) {
-            setFieldErrors(state.fieldErrors);
-        }
-
         if (state && !state.success && state.message) {
             toast.error(state.message);
         }
@@ -36,13 +45,11 @@ export default function RegisterForm() {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         // Clear error when user changes input
-        if (fieldErrors[name]) {
-            setFieldErrors((prev) => {
-                const next = { ...prev };
-                delete next[name];
-                return next;
-            });
-        }
+        setDismissedFields((prev) => {
+            const next = new Set(prev);
+            next.add(name);
+            return next;
+        });
     };
 
     const getPasswordStrength = (password: string) => {
@@ -72,7 +79,11 @@ export default function RegisterForm() {
                 <p className="text-xs text-muted-foreground">Commencez vos 30 jours gratuits maintenant.</p>
             </div>
 
-            <form action={formAction} className="space-y-4">
+            <form
+                action={formAction}
+                className="space-y-4"
+                onSubmit={() => setDismissedFields(new Set())}
+            >
                 <FormInput
                     id="name"
                     name="name"
