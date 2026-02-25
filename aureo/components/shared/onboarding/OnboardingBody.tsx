@@ -14,9 +14,13 @@ export default function OnboardingBody({
   accountName,
   balance,
   accountType,
+  currency,
+  iban,
   onAccountNameChange,
   onBalanceChange,
   onAccountTypeChange,
+  onCurrencyChange,
+  onIbanChange,
 }: {
   step: number;
   stepKey: number;
@@ -25,11 +29,15 @@ export default function OnboardingBody({
   accountName: string;
   balance: string;
   accountType: "COURANT" | "EPARGNE" | "LIVRET" | "INVESTISSEMENT" | "AUTRE";
+  currency: "EUR" | "USD" | "GBP" | "CHF";
+  iban: string;
   onAccountNameChange: (value: string) => void;
   onBalanceChange: (value: string) => void;
   onAccountTypeChange: (
     value: "COURANT" | "EPARGNE" | "LIVRET" | "INVESTISSEMENT" | "AUTRE"
   ) => void;
+  onCurrencyChange: (value: "EUR" | "USD" | "GBP" | "CHF") => void;
+  onIbanChange: (value: string) => void;
 }) {
   return (
     <div className="px-6 py-4 flex-1 min-h-0 overflow-y-auto">
@@ -62,9 +70,13 @@ export default function OnboardingBody({
               accountName={accountName}
               balance={balance}
               accountType={accountType}
+              currency={currency}
+              iban={iban}
               onAccountNameChange={onAccountNameChange}
               onBalanceChange={onBalanceChange}
               onAccountTypeChange={onAccountTypeChange}
+              onCurrencyChange={onCurrencyChange}
+              onIbanChange={onIbanChange}
             />
           </motion.div>
         )}

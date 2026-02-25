@@ -23,6 +23,8 @@ function generateFakeIBAN(): string {
 
 const ACCOUNT_TYPES = ["COURANT", "EPARGNE", "LIVRET", "INVESTISSEMENT", "AUTRE"] as const;
 type AccountType = (typeof ACCOUNT_TYPES)[number];
+const CURRENCIES = ["EUR", "USD", "GBP", "CHF"] as const;
+type Currency = (typeof CURRENCIES)[number];
 
 const normalizeText = (value: unknown) =>
   value == null ? "" : String(value);
@@ -42,6 +44,17 @@ const accountTypeSchema: z.ZodType<AccountType> = z
   .refine((v) => ACCOUNT_TYPES.includes(v as AccountType), "Type de compte invalide")
   .transform((v) => v as AccountType);
 
+const currencySchema: z.ZodType<Currency> = z
+  .preprocess((v) => (v == null ? "" : String(v)), z.string().trim())
+  .refine((v) => v.length > 0, "Devise requise")
+  .refine((v) => CURRENCIES.includes(v as Currency), "Devise invalide")
+  .transform((v) => v as Currency);
+
+const ibanSchema = z
+  .preprocess((v) => (v == null ? "" : String(v)), z.string().trim())
+  .transform((v) => (v.length === 0 ? undefined : v))
+  .refine((v) => v === undefined || (v.length >= 15 && v.length <= 34), "IBAN invalide");
+
 const AddBankAccountSchema = z.object({
   bankName: requiredText("Nom de la banque requis"),
   bankDomain: requiredText("Domaine de la banque requis"),
@@ -51,10 +64,12 @@ const AddBankAccountSchema = z.object({
     "Nom du compte trop long"
   ),
   accountType: accountTypeSchema,
+  currency: currencySchema,
   balance: requiredText("Solde requis")
     .transform((v) => parseFloat(v.replace(",", ".")))
     .refine((v) => !Number.isNaN(v), "Solde invalide")
     .refine((v) => v > 0, "Le solde doit être supérieur à 0"),
+  iban: ibanSchema,
 });
 
 type AddBankAccountInput = z.infer<typeof AddBankAccountSchema>;
@@ -71,7 +86,9 @@ const getRawFormData = (formData: FormData) => ({
   bankDomain: formData.get("bankDomain"),
   accountName: formData.get("accountName"),
   accountType: formData.get("accountType"),
+  currency: formData.get("currency"),
   balance: formData.get("balance"),
+  iban: formData.get("iban"),
 });
 
 const toErrorState = (fieldErrors: AddBankAccountFieldErrors): AddBankAccountState => ({
@@ -82,7 +99,9 @@ const toErrorState = (fieldErrors: AddBankAccountFieldErrors): AddBankAccountSta
     bankDomain: fieldErrors.bankDomain?.[0],
     accountName: fieldErrors.accountName?.[0],
     accountType: fieldErrors.accountType?.[0],
+    currency: fieldErrors.currency?.[0],
     balance: fieldErrors.balance?.[0],
+    iban: fieldErrors.iban?.[0],
   },
 });
 
@@ -96,8 +115,9 @@ const createBankAccount = async (
       bankName: data.bankName,
       bankDomain: data.bankDomain,
       type: data.accountType,
+      currency: data.currency,
       balance: data.balance,
-      iban: generateFakeIBAN(),
+      iban: data.iban ?? generateFakeIBAN(),
       userId,
     },
   });
