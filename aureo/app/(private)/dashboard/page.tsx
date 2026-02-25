@@ -34,19 +34,57 @@ export default async function DashboardPage() {
     year: "numeric",
   });
 
-  const bankAccountCount = await prisma.bankAccount.count({
+  const accounts = await prisma.bankAccount.findMany({
     where: { userId: user.id, isArchived: false },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      name: true,
+      bankName: true,
+      type: true,
+      balance: true,
+      currency: true,
+      iban: true,
+    },
   });
 
-  // Données financières — seront alimentées par la BDD en Phase 2
+  const formatMoney = (value: number, currency: string) =>
+    new Intl.NumberFormat("fr-FR", { style: "currency", currency }).format(value);
+
+  const totalsByCurrency = accounts.reduce<Record<string, number>>((acc, account) => {
+    const currency = account.currency || "EUR";
+    acc[currency] = (acc[currency] ?? 0) + account.balance;
+    return acc;
+  }, {});
+
+  const totalBalanceCurrencies = Object.entries(totalsByCurrency);
+  const hasAccounts = accounts.length > 0;
+  const totalBalanceValue = hasAccounts
+    ? totalBalanceCurrencies.length === 1
+      ? formatMoney(totalBalanceCurrencies[0][1], totalBalanceCurrencies[0][0])
+      : "Multi-devises"
+    : formatMoney(0, "EUR");
+  const totalBalanceSub = hasAccounts
+    ? totalBalanceCurrencies.length === 1
+      ? "Tous comptes confondus"
+      : totalBalanceCurrencies
+          .map(([currency, amount]) => formatMoney(amount, currency))
+          .join(" • ")
+    : "Aucun compte lié";
+
   const stats = {
     totalBalance: 0,
     monthIncome: 0,
     monthExpenses: 0,
     monthSavings: 0,
   };
-
-  const hasAccounts = bankAccountCount > 0;
+  const accountTypeLabels: Record<string, string> = {
+    COURANT: "Compte courant",
+    EPARGNE: "Compte épargne",
+    LIVRET: "Livret réglementé",
+    INVESTISSEMENT: "Compte-titres",
+    AUTRE: "Autre",
+  };
   const hasTransactions = false;
   const hasBudgets = false;
 
@@ -78,8 +116,8 @@ export default async function DashboardPage() {
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard
           label="Solde Total"
-          value={`€ ${stats.totalBalance.toLocaleString("fr-FR", { minimumFractionDigits: 2 })}`}
-          sub={hasAccounts ? "Tous comptes confondus" : "Aucun compte lié"}
+          value={totalBalanceValue}
+          sub={totalBalanceSub}
           icon={Wallet}
           iconColor="text-primary"
           iconBg="bg-primary/15"
@@ -167,8 +205,43 @@ export default async function DashboardPage() {
                 ctaHref="/accounts"
               />
             ) : (
-              <div className="p-5 grid grid-cols-2 gap-3">
-                {/* accounts.map(...) — Phase 2 */}
+              <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {accounts.map((account) => (
+                  <div
+                    key={account.id}
+                    className="rounded-xl border border-border/20 bg-white/5 p-4 flex flex-col gap-3"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-primary/15 border border-primary/20 flex items-center justify-center text-sm font-bold text-primary">
+                          {(account.bankName || account.name).charAt(0)}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold">{account.name}</p>
+                          <p className="text-xs text-muted-foreground">{account.bankName}</p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-semibold text-muted-foreground">
+                        {account.currency}
+                      </span>
+                    </div>
+                    <div className="flex items-end justify-between">
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          {accountTypeLabels[account.type]}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {account.iban
+                            ? `IBAN ••••${account.iban.slice(-4)}`
+                            : "IBAN non renseigné"}
+                        </p>
+                      </div>
+                      <p className="text-lg font-bold">
+                        {formatMoney(account.balance, account.currency)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </SectionCard>
