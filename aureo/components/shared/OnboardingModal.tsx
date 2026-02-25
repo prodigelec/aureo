@@ -26,6 +26,8 @@ export default function OnboardingModal() {
   const [accountType, setAccountType] = useState<
     "COURANT" | "EPARGNE" | "LIVRET" | "INVESTISSEMENT" | "AUTRE"
   >("COURANT");
+  const [currency, setCurrency] = useState<"EUR" | "USD" | "GBP" | "CHF">("EUR");
+  const [iban, setIban] = useState("");
 
   const [state, formAction, isPending] = useActionState(
     addBankAccountAction,
@@ -87,9 +89,13 @@ export default function OnboardingModal() {
             accountName={accountName}
             balance={balance}
             accountType={accountType}
+            currency={currency}
+            iban={iban}
             onAccountNameChange={setAccountName}
             onBalanceChange={setBalance}
             onAccountTypeChange={setAccountType}
+            onCurrencyChange={setCurrency}
+            onIbanChange={setIban}
           />
           <OnboardingFooter
             step={effectiveStep}

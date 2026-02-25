@@ -3,6 +3,7 @@
 import BankLogo from "@/components/shared/onboarding/BankLogo";
 
 type AccountType = "COURANT" | "EPARGNE" | "LIVRET" | "INVESTISSEMENT" | "AUTRE";
+type Currency = "EUR" | "USD" | "GBP" | "CHF";
 
 const ACCOUNT_TYPES: { value: AccountType; label: string; description: string }[] = [
   { value: "COURANT", label: "Compte courant", description: "Compte du quotidien" },
@@ -12,22 +13,37 @@ const ACCOUNT_TYPES: { value: AccountType; label: string; description: string }[
   { value: "AUTRE", label: "Autre", description: "Autre type de compte" },
 ];
 
+const CURRENCIES: { value: Currency; label: string }[] = [
+  { value: "EUR", label: "EUR — Euro" },
+  { value: "USD", label: "USD — Dollar US" },
+  { value: "GBP", label: "GBP — Livre sterling" },
+  { value: "CHF", label: "CHF — Franc suisse" },
+];
+
 export default function Step2AccountDetails({
   selectedBank,
   accountName,
   balance,
   accountType,
+  currency,
+  iban,
   onAccountNameChange,
   onBalanceChange,
   onAccountTypeChange,
+  onCurrencyChange,
+  onIbanChange,
 }: {
   selectedBank: { name: string; domain: string } | null;
   accountName: string;
   balance: string;
   accountType: AccountType;
+  currency: Currency;
+  iban: string;
   onAccountNameChange: (value: string) => void;
   onBalanceChange: (value: string) => void;
   onAccountTypeChange: (value: AccountType) => void;
+  onCurrencyChange: (value: Currency) => void;
+  onIbanChange: (value: string) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -105,6 +121,39 @@ export default function Step2AccountDetails({
             required
           />
         </div>
+      </div>
+
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+          Devise
+        </label>
+        <select
+          name="currency"
+          value={currency}
+          onChange={(event) => onCurrencyChange(event.target.value as Currency)}
+          className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-border/30 text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/40 transition"
+          required
+        >
+          {CURRENCIES.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+          IBAN (optionnel)
+        </label>
+        <input
+          type="text"
+          name="iban"
+          placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX"
+          value={iban}
+          onChange={(event) => onIbanChange(event.target.value)}
+          className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-border/30 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/40 transition"
+        />
       </div>
     </div>
   );
