@@ -8,14 +8,6 @@ import EmptyState from "@/components/dashboard/EmptyState";
 
 export const dynamic = "force-dynamic";
 
-const accountTypeLabels: Record<string, string> = {
-  COURANT: "Compte courant",
-  EPARGNE: "Compte épargne",
-  LIVRET: "Livret réglementé",
-  INVESTISSEMENT: "Compte-titres",
-  AUTRE: "Autre",
-};
-
 const formatMoney = (value: number, currency: string) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency }).format(value);
 
