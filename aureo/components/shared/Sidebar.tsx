@@ -24,7 +24,7 @@ type User = { id: string; name: string | null; email: string | null };
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, available: true },
   { href: "/accounts", label: "Comptes", icon: Wallet, available: true },
-  { href: "/transactions", label: "Transactions", icon: ArrowLeftRight, available: false },
+  { href: "/transactions", label: "Transactions", icon: ArrowLeftRight, available: true },
   { href: "/budgets", label: "Budgets", icon: PieChart, available: false },
   { href: "/reports", label: "Rapports", icon: BarChart3, available: false },
 ];
